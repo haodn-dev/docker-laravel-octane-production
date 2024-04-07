@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: ./docker/octane/app/Dockerfile
     ports:
-      - 8000:8000
+      - ${NGINX_PORT_MAPPING}:8000
     networks:
       - laravel-nginx-network
 networks:
