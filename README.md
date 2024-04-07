@@ -1,4 +1,4 @@
-Larvel With Docker Optimize
+Laravel With Docker Optimize - Octane - Swoole - Xdebug - OpCache
 ===============
 
 Configuration
@@ -16,11 +16,12 @@ copy the env.{environment}.example file to env and fill in the values
 Run with docker 
 ---------------
 
-- We got 4 option running the app with docker :
+- We got 5 option running the app with docker :
   - dev
   - dev-optimize
   - prod
   - prod-optimize
+  - octane
   
   To run each option, please change the COMPOSE_FILE in .env of docker (not laravel/.env)
   The difference between option:
@@ -30,7 +31,7 @@ Run with docker
     will make the application faster, but we need to run ```docker compose watch``` to sync the changes
   - prod : running the app without xdebug, mount all project directory to container
   - prod-optimize : running the app without xdebug, copy all project directory to container (except vendor)
-
+  - octane : running the app with swoole, this will make the application faster with Warmup feature
 _Note_ : in dev,prod,prod-optimize mode we're using command ```docker-compose up -d``` to run the app, in dev-optimize mode we're using command ```docker compose watch``` to sync the changes
 
 **_Note_** 
