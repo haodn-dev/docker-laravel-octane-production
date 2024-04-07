@@ -1,0 +1,28 @@
+services:
+  laravel_app:
+    container_name: laravel_app
+    environment:
+      TZ: Asia/Tokyo
+      ORDER_HISTORY_ENV: ${LARAVEL_ENV_FILE_DEFAULT}
+    restart: always
+    tty: true 
+    networks:
+      - laravel-nginx-network
+
+
+  laravel_nginx:
+    container_name: laravel_nginx
+    environment:
+      TZ: Asia/Tokyo
+    restart: always
+    tty: true
+    depends_on:
+      - laravel_app
+    ports:
+      - ${NGINX_PORT_MAPPING}:80
+    networks:
+      - laravel-nginx-network
+networks:
+  laravel-nginx-network:
+volumes:
+  laravel_vendor:

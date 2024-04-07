@@ -1,0 +1,14 @@
+services:
+  laravel_app:
+    build:
+      context: .
+      dockerfile: ./docker/app/optimize/Dockerfile
+    volumes:
+      - ./logs/php-fpm:/opt/logs/php-fpm
+#      - ./laravel/storage/logs:/opt/html/storage/logs
+  laravel_nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    volumes:
+      - ./logs/nginx:/opt/logs/nginx

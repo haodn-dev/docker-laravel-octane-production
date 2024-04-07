@@ -1,0 +1,16 @@
+services:
+  laravel_app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    volumes:
+      - ./laravel/:/opt/html/
+      - laravel_vendor:/opt/html/vendor
+      - ./logs/php-fpm:/opt/logs/php-fpm
+  laravel_nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    volumes:
+      - ./laravel:/opt/html
+      - ./logs/nginx:/opt/logs/nginx

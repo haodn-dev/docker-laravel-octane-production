@@ -1,0 +1,45 @@
+services:
+  laravel_app:
+    build:
+      context: .
+      dockerfile: ./docker/app/dev/Dockerfile
+    develop:
+      watch:
+        - action: sync
+          path: ./laravel
+          target: /opt/html
+          ignore:
+            - .git
+            - .idea
+            - vendor
+            - storage/logs
+    restart: unless-stopped
+    volumes:
+      # At this point, the volume is mounted to the container is not project folder.
+      # My target is use `docker compose watch` to sync the project folder to the container in window environment for better performance.
+      # Cause : I/O performance issue in window environment with vendor folder.
+#      - ./laravel/storage/logs/:/opt/html/storage/logs/:www-data
+      - laravel_vendor:/opt/html/vendor
+      - ./logs/php-fpm:/opt/logs/php-fpm:www-data
+  laravel_nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    develop:
+      watch:
+        - action: sync
+          path: ./laravel
+          target: /opt/html
+          ignore:
+            - .git
+            - .idea
+            - vendor
+            - storage/logs
+    restart: unless-stopped
+    volumes:
+      # At this point, the volume is mounted to the container is not project folder.
+      # My target is use `docker compose watch` to sync the project folder to the container in window environment for better performance.
+      # Cause : I/O performance issue in window environment with vendor folder.
+#      - ./laravel/storage/logs/:/opt/html/storage/logs/
+#      - laravel_vendor:/opt/html/vendor
+      - ./logs/nginx:/opt/logs/nginx

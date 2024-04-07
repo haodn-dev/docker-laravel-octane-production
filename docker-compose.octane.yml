@@ -1,0 +1,15 @@
+services:
+  laravel_app:
+    container_name: laravel_app
+    environment:
+      TZ: Asia/Tokyo
+      ORDER_HISTORY_ENV: ${LARAVEL_ENV_FILE_DEFAULT}
+    build:
+      context: .
+      dockerfile: ./docker/octane/app/Dockerfile
+    ports:
+      - 8000:8000
+    networks:
+      - laravel-nginx-network
+networks:
+  laravel-nginx-network:
