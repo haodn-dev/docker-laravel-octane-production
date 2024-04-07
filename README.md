@@ -32,6 +32,7 @@ Run with docker
   - prod : running the app without xdebug, mount all project directory to container
   - prod-optimize : running the app without xdebug, copy all project directory to container (except vendor)
   - octane : running the app with swoole, this will make the application faster with Warmup feature
+  
 _Note_ : in dev,prod,prod-optimize mode we're using command ```docker-compose up -d``` to run the app, in dev-optimize mode we're using command ```docker compose watch``` to sync the changes
 
 **_Note_** 
